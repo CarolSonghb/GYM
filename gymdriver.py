@@ -39,6 +39,7 @@ def viewClass():
     print("====================================")
     print("")
 
+
 def viewEnrolledList():
     class_name = input("Enter the class name to check its enrolled list: ")
 
@@ -58,6 +59,7 @@ def viewEnrolledList():
         viewClass()
         viewEnrolledList()
 
+
 def viewWaitlist():
     class_name = input("Enter the class name to check its waitlist: ")
 
@@ -75,6 +77,7 @@ def viewWaitlist():
         print(f"Class '{class_name}' not found. Please try again.")
         viewClass()
 
+
 def viewAllClass():
     viewClass()
     print("\n1. Check Enrolled List")
@@ -87,6 +90,7 @@ def viewAllClass():
     else:
         print("Invalid response, please try again.")
         viewAllClass()
+
 
 # Add a new group class
 def addClass():
@@ -153,6 +157,30 @@ def bookClass():
         book_class()
 
 
+def viewEnrollment():
+    member_id = input("Enter your member ID: ")
+    selected_member = None
+    for aMember in Member._Member__member_list:
+        if str(aMember._Member__member_id) == member_id:
+            selected_member = aMember
+            print(selected_member)
+            break
+    if selected_member:
+        enrolled_classes = selected_member.get_enrolled_class()
+        if enrolled_classes:
+            print(
+                f"Member ID {member_id} {selected_member._Member__name}'s enrolled group classes are: "
+            )
+            print(enrolled_classes)
+        else:
+            print("No enrolled classes found for the member.")
+    else:
+        print(
+            f"This Member ID {member_id} is not found in the system. Please try again."
+        )
+        viewEnrollment()
+
+
 def cancelClass():
     member_id = input("Enter your member ID: ")
     selected_member = None
@@ -215,7 +243,9 @@ def assignTrainer():
 
     if selected_class:
         viewTrainers()
-        trainer_name = input("Enter the name of the trainer for the class: ")
+        trainer_name = input(
+            f"Enter full name of the trainer you want to assign '{class_name}' to: "
+        )
 
         selected_trainer = None
         for aTrainer in Trainer._Trainer__trainer_list:
@@ -236,10 +266,11 @@ def assignTrainer():
         print(f"Class '{class_name}' not found. Please try again.")
         assignTrainer()
 
+
 def manageClass():
     print("\n Manage Group Classes")
     print("1 - Update Class Fee")
-    print("2 - Assign a Trainer to a Class ")
+    print("2 - Assign Trainer")
     manageChosen = input("\nPlease select a number from the menu: ")
     if manageChosen == "1":
         updateFee()
@@ -248,6 +279,73 @@ def manageClass():
     else:
         print("Invalid response, please try again.")
         manageClass()
+
+
+def viewTrainerClass():
+    trainer_name = input(
+        "Enter the trainer's full name to view their assigned classes: "
+    )
+
+    selected_trainer = None
+
+    for aTrainer in Trainer._Trainer__trainer_list:
+        if aTrainer._Trainer__name == trainer_name:
+            selected_trainer = aTrainer
+            break
+    if selected_trainer:
+        trainer_classes = selected_trainer.get_trainer_classes()
+        if trainer_classes:
+            print(f"The classes assigned to {trainer_name} are: ")
+            for aClass in trainer_classes:
+                print(aClass.class_name)
+        else:
+            print("No classes have been assigned to the trainer yet.")
+    else:
+        print(f"Trainer '{trainer_name}' not found. Please try again.")
+        viewTrainerClass()
+
+
+def memberCheckIn():
+    member_id = input("Enter your member ID: ")
+    selected_member = None
+    for aMember in Member._Member__member_list:
+        if str(aMember._Member__member_id) == member_id:
+            selected_member = aMember
+            break
+
+    if selected_member:
+        enrolled_classes = selected_member.get_enrolled_check()
+        if enrolled_classes:
+            print("You are enrolled in the following classes:")
+            for idx, class_name in enumerate(enrolled_classes, start=1):
+                print(f"{idx}. {class_name}")
+
+            while True:
+                try:
+                    choice = int(input("\nEnter the number of the class to check in: "))
+
+                    if choice == 0:
+                        break
+
+                    elif 1 <= choice <= len(enrolled_classes):
+                        selected_class_name = enrolled_classes[choice - 1]
+                        selected_class = checkClass(selected_class_name)
+
+                        if selected_class:
+                            result = selected_class.check_in_member(selected_member)
+                            print(result)
+                            break
+                        else:
+                            print("Selected class not found.")
+                            break
+                    else:
+                        print("Invalid choice. Please choose from the number below.")
+                except ValueError:
+                    print("Invalid input. Please enter a number from the list.")
+        else:
+            print("You are not enrolled in any classes.")
+    else:
+        print(f"This Member ID {member_id} is not found in the system.")
 
 
 # Dsiplay menu items for gym management
@@ -261,7 +359,9 @@ def dispMainMenu():
     print("4 - Add a Trainer")
     print("5 - Book a Class")
     print("6 - Cancel a Booking")
-    print("7 - Manage Group Classes (update fee/ assign trainer)")
+    print("7 - Manage Group Classes")
+    print("  • Update Class Fee")
+    print("  • Assign Trainer")
     print("8 - View Member Enrollment")
     print("9 - View Trainer Classes")
     print("10 - View All Members")
@@ -287,8 +387,14 @@ while response != "Q":
         cancelClass()
     if response == "7":
         manageClass()
+    if response == "8":
+        viewEnrollment()
+    if response == "9":
+        viewTrainerClass()
     if response == "10":
         viewMember()
+    if response == "11":
+        memberCheckIn()
 
     else:
         print("\nInvalid response, please try again.")
@@ -297,4 +403,5 @@ while response != "Q":
     input("Press Enter to continue.")
     response = dispMainMenu()
 
-print("Thank you for using the system.")
+print("\nThank you for using the system.")
+print("")

@@ -22,6 +22,9 @@ class Member:
         enrolled_classes = "\n".join(self.__classes_enrolled)
         return enrolled_classes
     
+    def get_enrolled_check(self):
+        return self.__classes_enrolled
+    
     def cancel_class(self, class_name):
         if class_name in self.__classes_enrolled:
             self.__classes_enrolled.remove(class_name)
