@@ -1,6 +1,7 @@
 from GroupExercise import *
 from Member import *
 from Trainer import *
+from prettytable import PrettyTable
 
 
 class1 = GroupExercise("Zumba", 2, 10.0)
@@ -66,7 +67,7 @@ def viewWaitlist():
     selected_class = checkClass(class_name)
 
     if selected_class:
-        waitlist_members = selected_class.get_wailist()
+        waitlist_members = selected_class.get_waitist()
         if waitlist_members:
             print(f"\nWaitlisted members for class '{class_name}' are:")
             for aMember in waitlist_members:
@@ -348,24 +349,63 @@ def memberCheckIn():
         print(f"This Member ID {member_id} is not found in the system.")
 
 
+def classReport():
+    print("Class Report")
+    # Create the table with the desired column headers
+    table = PrettyTable()
+    table.field_names = [
+        "Name",
+        "Max_Capacity",
+        "Fee",
+        "Avai_Slots",
+        "Trainer",
+        "Enrolled",
+        "Waitlist",
+        "Total_Payment",
+        "Attended",
+        "Attendance",
+    ]
+
+    # Access the class_list using the class name
+    for aClass in GroupExercise._GroupExercise__class_list:
+        table.add_row(
+            [
+                aClass.class_name,
+                aClass.class_capacity,
+                f"${aClass.class_fee:.2f}",  # Format the fee with 2 decimal places
+                aClass.get_available_slot(),
+                aClass.get_trainer(),
+                aClass.get_enrolled_number(),
+                aClass.get_waitlist_number(),
+                aClass.total_payment(),
+                aClass.get_attendees_number(),
+                f"{aClass.get_attendance_percentage():.2f}%",  # Format percentage with 2 decimal places
+            ]
+        )
+
+
+    print(table)
+
+
 # Dsiplay menu items for gym management
 def dispMainMenu():
     print("\n==== WELCOME TO GYM MANAGEMENT SYSTEM ====")
     print("\n1 - View All Group Classes")
-    print("  • Check Enrolled List")
-    print("  • Check Wait List")
+    print("    • Check Enrolled List")
+    print("    • Check Wait List")
     print("2 - Add a Class")
     print("3 - Add a Member")
     print("4 - Add a Trainer")
     print("5 - Book a Class")
     print("6 - Cancel a Booking")
     print("7 - Manage Group Classes")
-    print("  • Update Class Fee")
-    print("  • Assign Trainer")
+    print("    • Update Class Fee")
+    print("    • Assign Trainer")
     print("8 - View Member Enrollment")
     print("9 - View Trainer Classes")
     print("10 - View All Members")
     print("11 - Member Check In")
+    print("12 - View Class Report")
     print("Q - Quit")
     response = input("\nPlease select a number from the menu: ")
     response = response.upper()
@@ -395,6 +435,8 @@ while response != "Q":
         viewMember()
     if response == "11":
         memberCheckIn()
+    if response == "12":
+        classReport()
 
     else:
         print("\nInvalid response, please try again.")
