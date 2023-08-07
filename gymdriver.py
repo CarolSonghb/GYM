@@ -350,11 +350,11 @@ def memberCheckIn():
 
 
 def classReport():
-    print("Class Report")
+    print("\n*** Class Report ***")
     # Create the table with the desired column headers
     table = PrettyTable()
     table.field_names = [
-        "Name",
+        "Class_Name",
         "Max_Capacity",
         "Fee",
         "Avai_Slots",
