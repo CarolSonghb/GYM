@@ -24,50 +24,61 @@ class GroupExercise:
     def class_fee(self):
         return self.__fee
     
-    #get capacity of a group class
+    # get capacity of a group class
     @property
     def class_capacity(self):
         return self.__max_capacity
     
+    # get trainer's info
     def get_trainer(self):
         if self.__trainer is not None:
-            return self.__trainer
+            return self.__trainer.trainer_name
         else:
             return str("None")
     
+    # get all gym members currently enrolled in the group exercise class
     def get_enrolled_member(self):
         return self.__enrolled_member
     
+    # return the number of gym members currently enrolled in the class
     def get_enrolled_number(self):
         return len(self.__enrolled_member)
     
+    # get the waiting list for a group exercise class
     def get_waitlist(self):
         return self.__waitlisted_member
     
+    # return the number of waitlist participants in a group exercise class
     def get_waitlist_number(self):
         return len(self.__waitlisted_member)
     
+    # return the number of avaliable slots for enrolment in the class
     def get_available_slot(self):
         return self.__max_capacity - len(self.__enrolled_member)
     
+    # return a list of attendees for a class
     def get_checked_in_member(self):
         return self.__checked_in_member
     
+    # get the number of attendees for a class
     def get_attendees_number(self):
         return len(self.__checked_in_member)
     
+    # get the attendance percentage for a group exercise class
     def get_attendance_percentage(self):
         if len(self.__enrolled_member) == 0:
             return 0
         return (len(self.__checked_in_member) / len(self.__enrolled_member)) * 100
     
+    # mark a gym member's attendance for the class by adding them to the check-in list
     def check_in_member(self, member):
         if member in self.__enrolled_member:
             self.__checked_in_member.append(member)
             return f"{member._Member__name} has successfully checked in to class {self.__name}."
         else:
             return f"{member._Member__name} is not enrolled in this class."
-        
+    
+    # calculate and return the total payment received
     def total_payment(self):
         return len(self.__enrolled_member) * self.__fee
 
@@ -86,13 +97,14 @@ class GroupExercise:
             self.__waitlisted_member.append(member)
             return f"{self.__name} is full. {member._Member__name} has been added to the waitlist.."
     
-
+    # set the fee amount for the class
     def update_fee(self, new_fee):
         self.__fee = new_fee
-
+    
+    # assign a trainer to conduct the group exercise class
     def assign_trainer(self, trainer):
         self.__trainer = trainer
     
-
+    # returns a string that includes class name, max capacity and fee
     def __str__(self):
         return f"{self.__name:>10} {self.__max_capacity:>8} {self.__fee:>10}"
