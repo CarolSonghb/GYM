@@ -15,25 +15,26 @@
 from GroupExercise import *
 from Member import *
 from Trainer import *
-
 # pip install prettytable  (if need to)
 from prettytable import PrettyTable
 
-# 2 GroupExercise objects
-class1 = GroupExercise("Zumba", 2, 10.0)
-class2 = GroupExercise("Pilates", 4, 20.0)
+# The required functionalities are as follows:
+# 1. Create 2 GroupExercise objects
+class1 = GroupExercise("Zumba", 2, 0.0)
+class2 = GroupExercise("Pilates", 4, 0.0)
 
-# 5 Member objects
+# Create 5 Member objects
 member1 = Member.new_member("Alice Wonderland")
 member2 = Member.new_member("Kenneth Duncan")
 member3 = Member.new_member("Barbie Brown")
 member4 = Member.new_member("Adam Curtin")
 member5 = Member.new_member("Carol Song")
 
-# 2 Trainer objects
+# Create 2 Trainer objects
 trainer1 = Trainer("Jane Doe", "Aerobic Exercise")
 trainer2 = Trainer("Will Smith", "Injury Prevention")
 
+# Assign a trainer to each group exercise class
 
 # check if the class name that users input exist in the system
 def checkClass(class_name):
@@ -232,7 +233,6 @@ def cancelClass():
             )
         else:
             print("No enrolled classes found for the member.")
-            dispMainMenu()
     else:
         print(f"This Member ID {member_id} is not found in the system")
 
