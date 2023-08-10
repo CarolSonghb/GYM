@@ -6,7 +6,7 @@
 # Please select the numbers to test the functions
 # *******************************************************
 # This programm has used prettytable library for better display
-# Please install using "pip install prettytable" 
+# Please install using "pip install prettytable"
 # ********************************************************
 
 # What you can do:
@@ -15,6 +15,7 @@
 from GroupExercise import *
 from Member import *
 from Trainer import *
+
 # pip install prettytable  (if need to)
 from prettytable import PrettyTable
 
@@ -35,6 +36,7 @@ trainer1 = Trainer("Jane Doe", "Aerobic Exercise")
 trainer2 = Trainer("Will Smith", "Injury Prevention")
 
 # Assign a trainer to each group exercise class
+
 
 # check if the class name that users input exist in the system
 def checkClass(class_name):
@@ -58,6 +60,7 @@ def viewClass():
     print("====================================")
     print("")
 
+
 # Displays all gym members currently enrolled in the class
 def viewEnrolledList():
     class_name = input("Enter the class name to check its enrolled list: ")
@@ -78,6 +81,7 @@ def viewEnrolledList():
         viewClass()
         viewEnrolledList()
 
+
 # Display the waiting list for a class
 def viewWaitlist():
     class_name = input("Enter the class name to check its waitlist: ")
@@ -95,6 +99,7 @@ def viewWaitlist():
     else:
         print(f"Class '{class_name}' not found. Please try again.")
         viewClass()
+
 
 # Display all classes, then you can choose to view the enrolled list or the waitlist
 # for the class that you choose
@@ -138,6 +143,7 @@ def addMember():
         f"Member '{new_member._Member__name}' has been added with a member ID of {new_member._Member__member_id}."
     )
 
+
 def addTrainer():
     print("\nAdding a New Trainer")
     firstName = input("Enter trainer's first name: ")
@@ -145,7 +151,10 @@ def addTrainer():
     expertise = input("Enter trainer's expertise: ")
     name = firstName + " " + lastName
     new_trainer = Trainer(name, expertise)
-    print(f"A new trainer '{new_trainer.trainer_name}' with expertise '{new_trainer.expertise}' has been added.")
+    print(
+        f"A new trainer '{new_trainer.trainer_name}' with expertise '{new_trainer.expertise}' has been added."
+    )
+
 
 # View a list of current members
 def viewMember():
@@ -156,6 +165,7 @@ def viewMember():
     # Access the member_list using the class name
     for aMember in Member._Member__member_list:
         print(aMember)
+
 
 # Enrols a gym member into the group exercise class.
 # If the class is full, the member will be added to the waitlist.
@@ -186,6 +196,7 @@ def bookClass():
         print(f"Group Class '{book_class} not found. Please try again.'")
         book_class()
 
+
 # Display the list of enrolled participants for a class
 def viewEnrollment():
     member_id = input("Enter your member ID: ")
@@ -209,6 +220,7 @@ def viewEnrollment():
             f"This Member ID {member_id} is not found in the system. Please try again."
         )
         viewEnrollment()
+
 
 # Cancelling a specific member's group class
 def cancelClass():
@@ -243,6 +255,7 @@ def cancelClass():
     else:
         print(f"This Member ID {member_id} is not found in the system")
 
+
 # set a new fee to a class and update it
 def updateFee():
     viewClass()
@@ -259,6 +272,7 @@ def updateFee():
         )
         updateFee()
 
+
 # View all trainers
 def viewTrainers():
     print("\n========== List of Trainers ==========")
@@ -269,6 +283,7 @@ def viewTrainers():
         print(f"{aTrainer._Trainer__name:<20}{aTrainer._Trainer__expertise}")
 
     print("\n=======================================")
+
 
 # Assign a trainer to a class
 def assignTrainer():
@@ -302,6 +317,7 @@ def assignTrainer():
         print(f"Class '{class_name}' not found. Please try again.")
         assignTrainer()
 
+
 # Display a sub menu
 def manageClass():
     print("\n Manage Group Classes")
@@ -315,6 +331,7 @@ def manageClass():
     else:
         print("Invalid response, please try again.")
         manageClass()
+
 
 # Display the list of classes offered by a particular trainer
 def viewTrainerClass():
@@ -339,6 +356,7 @@ def viewTrainerClass():
     else:
         print(f"Trainer '{trainer_name}' not found. Please try again.")
         viewTrainerClass()
+
 
 # Mark a gym member's attendance for the class
 def memberCheckIn():
@@ -383,6 +401,7 @@ def memberCheckIn():
     else:
         print(f"This Member ID {member_id} is not found in the system.")
 
+
 # Class report includes the following information:
 # class name, max capacity, fee and avaliable spots
 # enrolled number, waitlisted number, number of attendees and attendance percentage
@@ -421,7 +440,6 @@ def classReport():
             ]
         )
 
-
     print(table)
 
 
@@ -449,41 +467,42 @@ def dispMainMenu():
     response = response.upper()
     return response
 
+
 if __name__ == "__main__":
-response = dispMainMenu()
-
-while response != "Q":
-    if response == "1":
-        viewAllClass()
-    elif response == "2":
-        addClass()
-    elif response == "3":
-        addMember()
-    elif response == "4":
-        addTrainer()
-    elif response == "5":
-        bookClass()
-    elif response == "6":
-        cancelClass()
-    elif response == "7":
-        manageClass()
-    elif response == "8":
-        viewEnrollment()
-    elif response == "9":
-        viewTrainerClass()
-    elif response == "10":
-        viewMember()
-    elif response == "11":
-        memberCheckIn()
-    elif response == "12":
-        classReport()
-
-    else:
-        print("\nInvalid response, please try again.")
-
-    print("")
-    input("Press Enter to continue.")
     response = dispMainMenu()
 
-print("\nThank you for using the system.")
-print("")
+    while response != "Q":
+        if response == "1":
+            viewAllClass()
+        elif response == "2":
+            addClass()
+        elif response == "3":
+            addMember()
+        elif response == "4":
+            addTrainer()
+        elif response == "5":
+            bookClass()
+        elif response == "6":
+            cancelClass()
+        elif response == "7":
+            manageClass()
+        elif response == "8":
+            viewEnrollment()
+        elif response == "9":
+            viewTrainerClass()
+        elif response == "10":
+            viewMember()
+        elif response == "11":
+            memberCheckIn()
+        elif response == "12":
+            classReport()
+
+        else:
+            print("\nInvalid response, please try again.")
+
+        print("")
+        input("Press Enter to continue.")
+        response = dispMainMenu()
+
+    print("\nThank you for using the system.")
+    print("")
