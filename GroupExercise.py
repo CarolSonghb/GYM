@@ -26,6 +26,10 @@ class GroupExercise:
     def class_capacity(self):
         return self.__max_capacity
     
+    @classmethod
+    def groupclass_list(cls):
+        return cls.__class_list
+    
     # set the fee amount for the class
     def update_fee(self, new_fee):
         self.__fee = new_fee

@@ -23,6 +23,10 @@ class Member:
         cls.member_id += 1
         return cls(name, new_memberID)
     
+    @classmethod
+    def member_list(cls):
+        return cls.__member_list
+    
     # add a new enrolled class to the enrolled list
     def add_enrolled_class(self, class_name):
         self.__classes_enrolled.append(class_name)

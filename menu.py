@@ -40,7 +40,7 @@ trainer2 = Trainer("Will Smith", "Injury Prevention")
 
 # check if the class name that users input exist in the system
 def checkClass(class_name):
-    for aClass in GroupExercise._GroupExercise__class_list:
+    for aClass in GroupExercise.groupclass_list():
         if aClass.class_name == class_name:
             return aClass
     return None
@@ -54,7 +54,7 @@ def viewClass():
     print(f"{'':<5}Name{'':<8}Slots{'':<5}Fee")
     print("------------------------------------")
     # Access the class_list using the class name
-    for aClass in GroupExercise._GroupExercise__class_list:
+    for aClass in GroupExercise.groupclass_list():
         print(aClass)
     print("")
     print("====================================")
@@ -140,7 +140,7 @@ def addMember():
     name = firstName + " " + lastName
     new_member = Member.new_member(name)
     print(
-        f"Member '{new_member._Member__name}' has been added with a member ID of {new_member._Member__member_id}."
+        f"Member '{new_member.member_name}' has been added with a member ID of {new_member.memberId}."
     )
 
 
@@ -162,8 +162,8 @@ def viewMember():
     print("========== Member List ==========")
     print("")
     print(f"MemberID{'':<8}Name")
-    # Access the member_list using the class name
-    for aMember in Member._Member__member_list:
+    
+    for aMember in Member.member_list():
         print(aMember)
 
 
@@ -179,8 +179,8 @@ def bookClass():
         member_id = input("Enter your member ID: ")
         # check if the member ID exists in the system
         selected_member = None
-        for aMember in Member._Member__member_list:
-            if str(aMember._Member__member_id) == member_id:
+        for aMember in Member.member_list():
+            if str(aMember.memberId) == member_id:
                 selected_member = aMember
                 break
 
@@ -201,8 +201,8 @@ def bookClass():
 def viewEnrollment():
     member_id = input("Enter your member ID: ")
     selected_member = None
-    for aMember in Member._Member__member_list:
-        if str(aMember._Member__member_id) == member_id:
+    for aMember in Member.member_list():
+        if str(aMember.memberId) == member_id:
             selected_member = aMember
             print(selected_member)
             break
@@ -210,7 +210,7 @@ def viewEnrollment():
         enrolled_classes = selected_member.get_enrolled_class()
         if enrolled_classes:
             print(
-                f"Member ID {member_id} {selected_member._Member__name}'s enrolled group classes are: "
+                f"Member ID {member_id} {selected_member.member_name}'s enrolled group classes are: "
             )
             print(enrolled_classes)
         else:
@@ -226,8 +226,8 @@ def viewEnrollment():
 def cancelClass():
     member_id = input("Enter your member ID: ")
     selected_member = None
-    for aMember in Member._Member__member_list:
-        if str(aMember._Member__member_id) == member_id:
+    for aMember in Member.member_list():
+        if str(aMember.memberId) == member_id:
             selected_member = aMember
             print(selected_member)
             break
@@ -236,12 +236,12 @@ def cancelClass():
         enrolled_classes = selected_member.get_enrolled_class()
         if enrolled_classes:
             print(
-                f"Member ID {member_id} {selected_member._Member__name}'s enrolled group classes are: "
+                f"Member ID {member_id} {selected_member.member_name}'s enrolled group classes are: "
             )
             print(enrolled_classes)
             class_to_cancel = input("Enter the name of the class to cancel: ")
             selected_class = None
-            for aClass in GroupExercise._GroupExercise__class_list:
+            for aClass in GroupExercise.groupclass_list():
                 if aClass.class_name == class_to_cancel:
                     selected_class = aClass
                     break
@@ -279,8 +279,8 @@ def viewTrainers():
     print(f"\n{'Trainer Name':<20}Expertise")
     print("---------------------------------------")
 
-    for aTrainer in Trainer._Trainer__trainer_list:
-        print(f"{aTrainer._Trainer__name:<20}{aTrainer._Trainer__expertise}")
+    for aTrainer in Trainer.trainer_list():
+        print(f"{aTrainer.trainer_name:<20}{aTrainer.expertise}")
 
     print("\n=======================================")
 
@@ -299,8 +299,8 @@ def assignTrainer():
         )
 
         selected_trainer = None
-        for aTrainer in Trainer._Trainer__trainer_list:
-            if aTrainer._Trainer__name == trainer_name:
+        for aTrainer in Trainer.trainer_list():
+            if aTrainer.trainer_name == trainer_name:
                 selected_trainer = aTrainer
                 break
 
@@ -308,7 +308,7 @@ def assignTrainer():
             selected_trainer.assign_class(selected_class)
             selected_class.assign_trainer(selected_trainer)
             print(
-                f"Trainer '{selected_trainer._Trainer__name}' has been assigned to '{selected_class.class_name}'."
+                f"Trainer '{selected_trainer.trainer_name}' has been assigned to '{selected_class.class_name}'."
             )
         else:
             print(f"Trainer '{trainer_name}' not found. Please try again.")
@@ -341,8 +341,8 @@ def viewTrainerClass():
 
     selected_trainer = None
 
-    for aTrainer in Trainer._Trainer__trainer_list:
-        if aTrainer._Trainer__name == trainer_name:
+    for aTrainer in Trainer.trainer_list():
+        if aTrainer.trainer_name == trainer_name:
             selected_trainer = aTrainer
             break
     if selected_trainer:
@@ -362,8 +362,8 @@ def viewTrainerClass():
 def memberCheckIn():
     member_id = input("Enter your member ID: ")
     selected_member = None
-    for aMember in Member._Member__member_list:
-        if str(aMember._Member__member_id) == member_id:
+    for aMember in Member.member_list():
+        if str(aMember.memberId) == member_id:
             selected_member = aMember
             break
 
@@ -424,7 +424,7 @@ def classReport():
     ]
 
     # Access the class_list using the class name
-    for aClass in GroupExercise._GroupExercise__class_list:
+    for aClass in GroupExercise.groupclass_list():
         table.add_row(
             [
                 aClass.class_name,

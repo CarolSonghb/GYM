@@ -16,6 +16,10 @@ class Trainer:
     def expertise(self):
         return self.__expertise
     
+    @classmethod
+    def trainer_list(cls):
+        return cls.__trainer_list
+    
     # adds a group exercise class to the list of classes assigned to the trainer
     def assign_class(self, group_exercise):
         self.__assigned_classes.append(group_exercise)
