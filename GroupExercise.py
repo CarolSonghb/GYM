@@ -1,6 +1,3 @@
-from Member import Member
-
-
 class GroupExercise:
     __class_list = []
 

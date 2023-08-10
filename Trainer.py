@@ -1,5 +1,3 @@
-from GroupExercise import *
-
 class Trainer:
     __trainer_list = []
 
