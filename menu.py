@@ -20,7 +20,7 @@ from Trainer import *
 from prettytable import PrettyTable
 
 # The required functionalities are as follows:
-# 1. Create 2 GroupExercise objects
+# Create 2 GroupExercise objects
 class1 = GroupExercise("Zumba", 2, 0.0)
 class2 = GroupExercise("Pilates", 4, 0.0)
 
