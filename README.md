@@ -1,5 +1,8 @@
 # 642 Assignment 1
 
+**Student Name: Carol (Haibei) Song**
+**Student ID: 1154836**
+
 Gym Management System
 
 This assignment file contains:
