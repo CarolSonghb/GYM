@@ -126,8 +126,12 @@ print("")
 # 11. Display the number of wait list participants in a group exercise class.
 waitlist_count1 = class1.get_waitlist_number()
 waitlist_count2 = class2.get_waitlist_number()
-print(f"Number of waitlist participants in Class '{class1.class_name}': {waitlist_count1}")
-print(f"Number of waitlist participants in Class '{class2.class_name}': {waitlist_count2}")
+print(
+    f"Number of waitlist participants in Class '{class1.class_name}': {waitlist_count1}"
+)
+print(
+    f"Number of waitlist participants in Class '{class2.class_name}': {waitlist_count2}"
+)
 print("")
 
 # 12. Display the number of attendees for a group exercise class.
@@ -136,7 +140,9 @@ print(f"Number of attendees in Class '{class1.class_name}': {attendees_count}")
 
 # 13. Display the attendance percentage for a group exercise class.
 attendance_percentage = class1.get_attendance_percentage()
-print(f"Attendance percentage for Class '{class1.class_name}': {attendance_percentage:.2f}%")
+print(
+    f"Attendance percentage for Class '{class1.class_name}': {attendance_percentage:.2f}%"
+)
 
 # 14. Display the total payment collected for a group exercise class.
 total_payment = class1.total_payment()
@@ -163,6 +169,3 @@ else:
         print(group_class.class_name)
 
 print("\nThe end. Thank you.")
-
-
-
