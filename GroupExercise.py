@@ -29,6 +29,23 @@ class GroupExercise:
     def class_capacity(self):
         return self.__max_capacity
     
+    # set the fee amount for the class
+    def update_fee(self, new_fee):
+        self.__fee = new_fee
+        return f"The fee for Class '{self.__name}' has been set to ${self.__fee}."
+    
+    # assign a trainer to conduct the group exercise class
+    def assign_trainer(self, trainer):
+        self.__trainer = trainer
+        return f"Trainer '{self.__trainer.trainer_name}' has been assigned to the Class '{self.__name}'"
+    
+    def member_cancel(self, member):
+        if member in self.__enrolled_member:
+            self.__enrolled_member.remove(member)
+            return f"Enrollment for Member{member.memberId} '{member.member_name}' in Class '{self.__name}' has been cancelled."
+        else:
+            return f"Member{member.memberId} '{member.member_name}' is not enrolled in Class '{self.__name}'."
+    
     # get trainer's info
     def get_trainer(self):
         if self.__trainer is not None:
@@ -74,9 +91,9 @@ class GroupExercise:
     def check_in_member(self, member):
         if member in self.__enrolled_member:
             self.__checked_in_member.append(member)
-            return f"{member._Member__name} has successfully checked in to class {self.__name}."
+            return f"'{member.member_name}' has successfully checked in to Class '{self.__name}'."
         else:
-            return f"{member._Member__name} is not enrolled in this class."
+            return f"{member.member_name} is not enrolled in this class."
     
     # calculate and return the total payment received
     def total_payment(self):
@@ -85,25 +102,16 @@ class GroupExercise:
     # Enrols a gym member into the group exercise class.
     # If the class is full, the member will be added to the waitlist.
     def enrol_member(self, member):
-        if not isinstance(member, Member):
-            return "Invalid member object."
-        
         if len(self.__enrolled_member) < self.__max_capacity:
             # add the member to the enrolled_member list
             self.__enrolled_member.append(member)
-            return f"{member._Member__name} has been enrolled in {self.__name}."
+            return f"Member{member.memberId} '{member.member_name}' is succesfully enrolled in Class '{self.__name}'."
         else:
             # add the member to the waitlist
             self.__waitlisted_member.append(member)
-            return f"{self.__name} is full. {member._Member__name} has been added to the waitlist.."
+            return f"Class '{self.__name}' is full. Member{member.memberId} '{member.member_name}' has been added to the waitlist.."
     
-    # set the fee amount for the class
-    def update_fee(self, new_fee):
-        self.__fee = new_fee
     
-    # assign a trainer to conduct the group exercise class
-    def assign_trainer(self, trainer):
-        self.__trainer = trainer
     
     # returns a string that includes class name, max capacity and fee
     def __str__(self):

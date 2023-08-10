@@ -7,7 +7,15 @@ class Member:
         self.__member_id = member_id
         self.__classes_enrolled = []
         Member.__member_list.append(self)
-        
+    
+    @property
+    def member_name(self):
+        return self.__name
+    
+    @property
+    def memberId(self):
+        return self.__member_id
+    
     # when adding a new member, increase their member ID by 1
     @classmethod
     def new_member(cls, name):
@@ -32,6 +40,9 @@ class Member:
     def cancel_class(self, class_name):
         if class_name in self.__classes_enrolled:
             self.__classes_enrolled.remove(class_name)
+            return f"'{self.__name}' has canceled Class '{class_name.class_name}'"
+        else:
+            return f"You are not enrolled in the class"
 
     # return a string that includs member ID and name
     def __str__(self):

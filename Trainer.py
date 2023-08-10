@@ -1,3 +1,5 @@
+from GroupExercise import *
+
 class Trainer:
     __trainer_list = []
 
@@ -19,6 +21,7 @@ class Trainer:
     # adds a group exercise class to the list of classes assigned to the trainer
     def assign_class(self, group_exercise):
         self.__assigned_classes.append(group_exercise)
+        return f"Class '{group_exercise.class_name}' has been assigned to Trainer '{self.__name}'"
     
     # get all trainers in this gym
     @classmethod
@@ -31,4 +34,4 @@ class Trainer:
     
     # return a string that includes trainer's name and expertise
     def __str__(self):
-        return f"{self.__name}'s expertise is {self.__expertise}"
+        return f"{self.__name:>5}\t{self.__expertise}"

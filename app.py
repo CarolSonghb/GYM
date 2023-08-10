@@ -1,7 +1,7 @@
 # Student Name: Carol (Haibei) Song
 # Student ID: 1154836
 
-# Driver Notes:
+# Notes:
 # A menu will be displayed in the terminal when you run the programm
 # Please select the numbers to test the functions
 # *******************************************************
@@ -219,6 +219,7 @@ def cancelClass():
             selected_member = aMember
             print(selected_member)
             break
+
     if selected_member:
         enrolled_classes = selected_member.get_enrolled_class()
         if enrolled_classes:
@@ -227,10 +228,16 @@ def cancelClass():
             )
             print(enrolled_classes)
             class_to_cancel = input("Enter the name of the class to cancel: ")
-            selected_member.cancel_class(class_to_cancel)
-            print(
-                f"Class '{class_to_cancel}' has been removed from {selected_member._Member__name}'s booking."
-            )
+            selected_class = None
+            for aClass in GroupExercise._GroupExercise__class_list:
+                if aClass.class_name == class_to_cancel:
+                    selected_class = aClass
+                    break
+            if selected_class:
+                cancel_result = selected_class.member_cancel(selected_member)
+                print(cancel_result)
+            else:
+                print(f"Class '{class_to_cancel}' not found.")
         else:
             print("No enrolled classes found for the member.")
     else:
@@ -442,7 +449,7 @@ def dispMainMenu():
     response = response.upper()
     return response
 
-
+if __name__ == "__main__":
 response = dispMainMenu()
 
 while response != "Q":
