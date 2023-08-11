@@ -89,7 +89,7 @@ def viewWaitlist():
     selected_class = checkClass(class_name)
 
     if selected_class:
-        waitlist_members = selected_class.get_waitist()
+        waitlist_members = selected_class.get_waitlist()
         if waitlist_members:
             print(f"\nWaitlisted members for class '{class_name}' are:")
             for aMember in waitlist_members:
@@ -463,7 +463,7 @@ def dispMainMenu():
     print("11 - Member Check In")
     print("12 - View Class Report")
     print("Q - Quit")
-    response = input("\nPlease select a number from the menu: ")
+    response = input("\nPlease enter a number from the menu: ")
     response = response.upper()
     return response
 

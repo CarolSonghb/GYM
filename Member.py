@@ -43,13 +43,13 @@ class Member:
     # cancels enrolment in a group exercise class
     def cancel_class(self, class_name):
         if class_name in self.__classes_enrolled:
-            self.__classes_enrolled.remove(class_name)
-            return f"'{self.__name}' has canceled Class '{class_name.class_name}'"
+            self.get_enrolled_check.remove(class_name)
+            return f"'{self.member_name}' has canceled Class '{class_name.class_name}'"
         else:
             return f"You are not enrolled in the class"
 
     # return a string that includs member ID and name
     def __str__(self):
-        return f"{self.__member_id:>5}\t\t{self.__name}"
+        return f"{self.memberId:>5}\t\t{self.member_name}"
         
     
