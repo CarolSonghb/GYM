@@ -16,6 +16,11 @@ class Member:
     def memberId(self):
         return self.__member_id
     
+    @property
+    # return a list of enrolled classes of the member
+    def get_enrolled_check(self):
+        return self.__classes_enrolled
+    
     # when adding a new member, increase their member ID by 1
     @classmethod
     def new_member(cls, name):
@@ -29,20 +34,17 @@ class Member:
     
     # add a new enrolled class to the enrolled list
     def add_enrolled_class(self, class_name):
-        self.__classes_enrolled.append(class_name)
+        self.get_enrolled_check.append(class_name)
     
     # get all booked class of the member
     def get_enrolled_class(self):
-        enrolled_classes = "\n".join(self.__classes_enrolled)
+        # display every class name in a new line
+        enrolled_classes = "\n".join(self.get_enrolled_check())
         return enrolled_classes
-    
-    # when checking in, return a list of enrolled classes of the member
-    def get_enrolled_check(self):
-        return self.__classes_enrolled
     
     # cancels enrolment in a group exercise class
     def cancel_class(self, class_name):
-        if class_name in self.__classes_enrolled:
+        if class_name in self.get_enrolled_check:
             self.get_enrolled_check.remove(class_name)
             return f"'{self.member_name}' has canceled Class '{class_name.class_name}'"
         else:

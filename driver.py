@@ -96,7 +96,7 @@ print(checkInResult)
 print("")
 
 # 7. Display the list of enrolled participants for a group exercise class.
-enrollList = class1.get_enrolled_member()
+enrollList = class1.get_enrolled_member
 print(f"Enrolled Members in Class '{class1.class_name}':")
 for member in enrollList:
     print(member)
@@ -149,7 +149,7 @@ total_payment = class1.total_payment()
 print(f"Total payment collected for Class '{class1.class_name}': ${total_payment:.2f}")
 
 # 15. Display the list of group exercise classes for which a specific member is enrolled.
-enrolled_classes = member1.get_enrolled_check()
+enrolled_classes = member1.get_enrolled_check
 
 if enrolled_classes:
     print(f"\nClasses enrolled by {member1.member_name}:")

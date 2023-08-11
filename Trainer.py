@@ -16,19 +16,18 @@ class Trainer:
     def expertise(self):
         return self.__expertise
     
+    @property
+    def assigned_class(self):
+        return self.__assigned_classes
+    
     @classmethod
     def trainer_list(cls):
         return cls.__trainer_list
     
     # adds a group exercise class to the list of classes assigned to the trainer
     def assign_class(self, group_exercise):
-        self.__assigned_classes.append(group_exercise)
-        return f"Class '{group_exercise.class_name}' has been assigned to Trainer '{self.__name}'"
-    
-    # get all trainers in this gym
-    @classmethod
-    def get_trainer_list(cls):
-        return cls.__trainer_list
+        self.assigned_class.append(group_exercise)
+        return f"Class '{group_exercise.class_name}' has been assigned to Trainer '{self.trainer_name}'"
     
     # get a list of group exercise classes assigned to the trainer
     def get_trainer_classes(self):

@@ -26,6 +26,11 @@ class GroupExercise:
     def class_capacity(self):
         return self.__max_capacity
     
+    @property
+     # get all gym members currently enrolled in the group exercise class
+    def get_enrolled_member(self):
+        return self.__enrolled_member
+    
     @classmethod
     def groupclass_list(cls):
         return cls.__class_list
@@ -40,13 +45,9 @@ class GroupExercise:
         self.__trainer = trainer
         return f"Trainer '{trainer.trainer_name}' has been assigned to the Class '{self.class_name}'"
     
-    # get all gym members currently enrolled in the group exercise class
-    def get_enrolled_member(self):
-        return self.__enrolled_member
-    
     def member_cancel(self, member):
-        if member in self.get_enrolled_member():
-            self.get_enrolled_member().remove(member)
+        if member in self.get_enrolled_member:
+            self.get_enrolled_member.remove(member)
             return f"Enrollment for Member{member.memberId} '{member.member_name}' in Class '{self.class_name}' has been cancelled."
         else:
             return f"Member{member.memberId} '{member.member_name}' is not enrolled in Class '{self.class_name}'."
@@ -60,7 +61,7 @@ class GroupExercise:
     
     # return the number of gym members currently enrolled in the class
     def get_enrolled_number(self):
-        return len(self.get_enrolled_member())
+        return len(self.get_enrolled_member)
     
     # get the waiting list for a group exercise class
     def get_waitlist(self):
@@ -90,7 +91,7 @@ class GroupExercise:
     
     # mark a gym member's attendance for the class by adding them to the check-in list
     def check_in_member(self, member):
-        if member in self.get_enrolled_member():
+        if member in self.get_enrolled_member:
             self.get_checked_in_member().append(member)
             return f"'{member.member_name}' has successfully checked in to Class '{self.class_name}'."
         else:
@@ -103,9 +104,9 @@ class GroupExercise:
     # Enrols a gym member into the group exercise class.
     # If the class is full, the member will be added to the waitlist.
     def enrol_member(self, member):
-        if len(self.get_enrolled_member()) < self.class_capacity:
+        if self.get_enrolled_number() < self.class_capacity:
             # add the member to the enrolled_member list
-            self.get_enrolled_member().append(member)
+            self.get_enrolled_member.append(member)
             return f"Member{member.memberId} '{member.member_name}' is succesfully enrolled in Class '{self.__name}'."
         else:
             # add the member to the waitlist
